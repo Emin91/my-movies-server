@@ -50,14 +50,15 @@ let mypromise = function functionOne(testInput) {
 };
 
 app.get('/', async (req, res) => {
-    getUser()
-    try {
-        const answer = await mypromise();
-        res.send(answer);
-    }
-    catch (error) {
-        return next(error);
-    }
+    const html = await axios.get('https://www.ivi.az/collections/best-movies');
+    const $ = cheerio.load(html);
+    $('.gallery__item.gallery__item_virtual').each((i, el) => {
+        const title = $(el).find('.nbl-slimPosterBlock__title').text() || null;
+        const imgLink = $(el).find('img').attr('src') || null;
+        const movieId = $(el).find('a').attr('href').match(/\d+/g).toString() || null;
+        const ageLimit = $(el).find('.nbl-poster__nbl-ageBadge').attr('class').match(/\d+/g).toString() || null;
+        arr.push({ id: uuid(), title, imgLink, movieId, ageLimit });
+    })
 });
 
 
