@@ -19,7 +19,7 @@ async function wait(ms) {
 
 
 app.get('/', async (req, res) => {
-    request('https://www.ivi.az/collections/best-movies', async (error, response, html) => {
+    const resal = request('https://www.ivi.az/collections/best-movies', async (error, response, html) => {
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
 
@@ -32,8 +32,9 @@ app.get('/', async (req, res) => {
                 arr.push({ id: uuid(), title, imgLink, movieId, ageLimit });
             })
         }
+        return 'okay'
     })
-    res.json({ data: JSON.stringify(arr) });
+    resal && res.json({ data: JSON.stringify(arr) });
 });
 
 
