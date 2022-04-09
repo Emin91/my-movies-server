@@ -33,7 +33,6 @@ app.get('/', async (req, res) => {
             })
         }
     })
-    await wait(6000)
     res.json({ data: JSON.stringify(arr) });
 });
 
