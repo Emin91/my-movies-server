@@ -95,7 +95,7 @@ app.get('/movie/:id', (req, res) => {
 });
 
 app.get('/', async (req, res) => {
-    res.send('Hello')
+    res.send('Hellosss')
     res.json({success: true, data: JSON.stringify(arr)});
 });
 
