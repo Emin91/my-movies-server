@@ -1,13 +1,11 @@
 const express = require('express');
+require('dotenv').config();
 const request = require('request');
 const cheerio = require('cheerio');
 const app = express();
-var HTMLParser = require('node-html-parser');
 const { v4: uuid } = require('uuid');
 
-
-const port = 3001;
-
+const port = process.env.PORT
 const arr = [];
 const movieInfo = {}
 request('https://www.ivi.az/collections/best-movies', (error, response, html) => {
