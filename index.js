@@ -16,8 +16,7 @@ async function wait(ms) {
     });
 }
 
-async function getParse() {
-    request('https://www.ivi.az/collections/best-movies', (error, response, html) => {
+request('https://www.ivi.az/collections/best-movies', (error, response, html) => {
     if (!error && response.statusCode == 200) {
         const $ = cheerio.load(html);
 
@@ -31,7 +30,6 @@ async function getParse() {
         })
     }
 })
-}
 
 let mypromise = function functionOne(testInput) {
     
@@ -49,7 +47,6 @@ let mypromise = function functionOne(testInput) {
 };
 
 app.get('/', async (req, res) => {
-    getParse()
     try {
         const answer = await mypromise();
         res.send(answer);
