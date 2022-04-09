@@ -34,21 +34,6 @@ async function getUser() {
 }
 
 
-let mypromise = function functionOne(testInput) {
-
-    return new Promise((resolve, reject) => {
-        setTimeout(
-            () => {
-                if (resolvedFlag == true) {
-                    resolve(JSON.stringify(arr));
-                } else {
-                    reject("Rejected")
-                }
-            }, 6000
-        );
-    });
-};
-
 app.get('/', async (req, res) => {
     const html = await axios.get('https://www.ivi.az/collections/best-movies');
     const $ = cheerio.load(html);
@@ -59,7 +44,8 @@ app.get('/', async (req, res) => {
         const ageLimit = $(el).find('.nbl-poster__nbl-ageBadge').attr('class').match(/\d+/g).toString() || null;
         arr.push({ id: uuid(), title, imgLink, movieId, ageLimit });
     })
-    res.json({data: JSON.stringify(arr)})
+    await wait(6000)
+    arr.length && res.json({data: JSON.stringify(arr)})
 });
 
 
