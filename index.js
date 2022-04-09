@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.get('/', async (req, res) => {
-    res.send('Hellosss')
+    res.json({success: true, data: 'hello'})
 });
 
 
