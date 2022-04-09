@@ -16,29 +16,30 @@ async function wait(ms) {
     });
 }
 
-let mypromise = function functionOne(testInput){
+let mypromise = function functionOne(testInput) {
     console.log("Entered function");
-    return new Promise((resolve ,reject)=>{
+    return new Promise((resolve, reject) => {
         setTimeout(
-            ()=>{
+            () => {
                 console.log("Inside the promise");
-                if(resolvedFlag==true){
+                if (resolvedFlag == true) {
                     resolve("Resolved");
-                }else{
+                } else {
                     reject("Rejected")
-                }     
-            } , 6000
+                }
+            }, 6000
         );
     });
 };
 
 app.get('/', async (req, res) => {
-    mypromise().then((res)=>{
-        console.log(`The function recieved with value ${res}`)
-        res.json({ data: JSON.stringify(arr) });
-    }).catch((error)=>{
-        console.log(`Handling error as we received ${error}`);
-    });
+    try {
+        const answer = await mypromise();
+        res.send(answer);
+    }
+    catch (error) {
+        return next(error);
+    }
 });
 
 
