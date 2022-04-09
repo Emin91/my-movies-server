@@ -10,7 +10,6 @@ const arr = [];
 const movieInfo = {}
 
 function callParse() {
-    console.log('callParse', )
     request('https://www.ivi.az/collections/best-movies', (error, response, html) => {
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
@@ -97,7 +96,7 @@ app.get('/movie/:id', (req, res) => {
 });
 
 app.get('/', async (req, res) => {
-    // callParse()
+    callParse()
     res.json({ data: 'JSON.stringify(arr)' });
 });
 
