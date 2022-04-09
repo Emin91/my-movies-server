@@ -26,11 +26,11 @@ function callParse() {
     })
 
 }
-// async function wait(ms) {
-//     return new Promise((resolve, reject) => {
-//         setTimeout(resolve, ms)
-//     });
-// }
+async function wait(ms) {
+    return new Promise((resolve, reject) => {
+        setTimeout(resolve, ms)
+    });
+}
 
 app.get('/movie/:id', (req, res) => {
     const qualityList = [];
@@ -97,6 +97,7 @@ app.get('/movie/:id', (req, res) => {
 
 app.get('/', async (req, res) => {
     callParse()
+    await wait(6000)
     res.json({ data: 'JSON.stringify(arr)' });
 });
 
