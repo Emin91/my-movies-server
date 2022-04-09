@@ -34,7 +34,7 @@ async function getParse() {
 }
 
 let mypromise = function functionOne(testInput) {
-    getParse()
+    
     return new Promise((resolve, reject) => {
         setTimeout(
             () => {
@@ -50,6 +50,7 @@ let mypromise = function functionOne(testInput) {
 
 app.get('/', async (req, res) => {
     try {
+        await getParse()
         const answer = await mypromise();
         res.send(answer);
     }
