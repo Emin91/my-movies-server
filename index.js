@@ -46,7 +46,7 @@ app.get('/', async (req, res) => {
     })
     await wait(6000)
     console.log('html', html)
-    res.json({data: html})
+    res.send({data: html})
 });
 
 
