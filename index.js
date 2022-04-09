@@ -31,10 +31,10 @@ app.get('/', async (req, res) => {
                 const ageLimit = $(el).find('.nbl-poster__nbl-ageBadge').attr('class').match(/\d+/g).toString() || null;
                 arr.push({ id: uuid(), title, imgLink, movieId, ageLimit });
             })
-            await wait(6000)
-            res.json({ data: JSON.stringify(arr) });
         }
     })
+    await wait(6000)
+    res.json({ data: JSON.stringify(arr) });
 });
 
 
