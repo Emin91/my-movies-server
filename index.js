@@ -17,13 +17,11 @@ async function wait(ms) {
 }
 
 let mypromise = function functionOne(testInput) {
-    console.log("Entered function");
     return new Promise((resolve, reject) => {
         setTimeout(
             () => {
-                console.log("Inside the promise");
                 if (resolvedFlag == true) {
-                    resolve("Resolved");
+                    resolve(JSON.stringify(arr));
                 } else {
                     reject("Rejected")
                 }
