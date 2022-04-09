@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.get('/', async (req, res) => {
-    res.send('JSON.stringify(arr)');
+    res.end('JSON.stringify(arr)');
 });
 
 
