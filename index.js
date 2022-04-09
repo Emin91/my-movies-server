@@ -5,7 +5,7 @@ const cheerio = require('cheerio');
 const app = express();
 const { v4: uuid } = require('uuid');
 
-const port = process.env.PORT
+const port = process.env.PORT || 80
 const arr = [];
 const movieInfo = {}
 
