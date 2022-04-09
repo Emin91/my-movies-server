@@ -94,9 +94,9 @@ app.get('/movie/:id', (req, res) => {
 
 });
 
-app.post('/', (req, res) => {
-    res.send('./index.html')
+app.get('/', (req, res) => {
     res.send(JSON.stringify(arr));
+    res.end('<h1>Hello</h1>')
 });
 
 
