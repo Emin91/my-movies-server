@@ -45,7 +45,7 @@ app.get('/', async (req, res) => {
         arr.push({ id: uuid(), title, imgLink, movieId, ageLimit });
     })
     await wait(6000)
-    res.json({data: JSON.stringify(arr)})
+    res.json({data: JSON.stringify(html)})
 });
 
 
