@@ -96,9 +96,22 @@ app.get('/movie/:id', (req, res) => {
 });
 
 app.get('/', async (req, res) => {
-    callParse()
+    request('https://www.ivi.az/collections/best-movies', (error, response, html) => {
+        if (!error && response.statusCode == 200) {
+            const $ = cheerio.load(html);
+
+            // Get best movies list
+            $('.gallery__item.gallery__item_virtual').each((i, el) => {
+                const title = $(el).find('.nbl-slimPosterBlock__title').text() || null;
+                const imgLink = $(el).find('img').attr('src') || null;
+                const movieId = $(el).find('a').attr('href').match(/\d+/g).toString() || null;
+                const ageLimit = $(el).find('.nbl-poster__nbl-ageBadge').attr('class').match(/\d+/g).toString() || null;
+                arr.push({ id: uuid(), title, imgLink, movieId, ageLimit });
+            })
+            res.json({ data: JSON.stringify(arr) });
+        }
+    })
     // await wait(6000)
-    arr.length && res.json({ data: JSON.stringify(arr) });
 });
 
 
