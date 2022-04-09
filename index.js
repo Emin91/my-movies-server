@@ -92,8 +92,9 @@ app.get('/movie/:id', (req, res) => {
 
 });
 
-app.get('/', (req, res) => {
-    res.json({data: JSON.stringify(arr)});
+app.get('/', async(req, res) => {
+    await wait(6000)
+    arr.length && res.json({data: JSON.stringify(arr)});
 });
 
 
