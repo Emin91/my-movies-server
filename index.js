@@ -1,8 +1,8 @@
 const express = require('express');
+require('dotenv').config()
 const request = require('request');
 const cheerio = require('cheerio');
 const app = express();
-require('dotenv').config()
 var HTMLParser = require('node-html-parser');
 const { v4: uuid } = require('uuid');
 
@@ -95,7 +95,7 @@ app.get('/movie/:id', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send(JSON.stringify(arr));
+    // res.send(JSON.stringify(arr));
     res.end('<h1>Hello</h1>')
 });
 
