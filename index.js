@@ -49,8 +49,8 @@ let mypromise = function functionOne(testInput) {
 };
 
 app.get('/', async (req, res) => {
+    getParse()
     try {
-        await getParse()
         const answer = await mypromise();
         res.send(answer);
     }
