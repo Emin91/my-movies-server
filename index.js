@@ -4,6 +4,8 @@ const request = require('request');
 const cheerio = require('cheerio');
 const app = express();
 const { v4: uuid } = require('uuid');
+const axios = require('axios');
+
 
 const port = process.env.PORT || 80
 const arr = [];
@@ -15,12 +17,10 @@ async function wait(ms) {
         setTimeout(resolve, ms)
     });
 }
-
-request('https://www.ivi.az/collections/best-movies', (error, response, html) => {
-    if (!error && response.statusCode == 200) {
+async function getUser() {
+    try {
+        const html = await axios.get('https://www.ivi.az/collections/best-movies');
         const $ = cheerio.load(html);
-
-        // Get best movies list
         $('.gallery__item.gallery__item_virtual').each((i, el) => {
             const title = $(el).find('.nbl-slimPosterBlock__title').text() || null;
             const imgLink = $(el).find('img').attr('src') || null;
@@ -28,11 +28,14 @@ request('https://www.ivi.az/collections/best-movies', (error, response, html) =>
             const ageLimit = $(el).find('.nbl-poster__nbl-ageBadge').attr('class').match(/\d+/g).toString() || null;
             arr.push({ id: uuid(), title, imgLink, movieId, ageLimit });
         })
+    } catch (error) {
+        console.error(error);
     }
-})
+}
+
 
 let mypromise = function functionOne(testInput) {
-    
+
     return new Promise((resolve, reject) => {
         setTimeout(
             () => {
@@ -47,6 +50,7 @@ let mypromise = function functionOne(testInput) {
 };
 
 app.get('/', async (req, res) => {
+    getUser()
     try {
         const answer = await mypromise();
         res.send(answer);
