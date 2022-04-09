@@ -24,11 +24,11 @@ request('https://www.ivi.az/collections/best-movies', (error, response, html) =>
     }
 })
 
-async function wait(ms) {
-    return new Promise((resolve, reject) => {
-        setTimeout(resolve, ms)
-    });
-}
+// async function wait(ms) {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(resolve, ms)
+//     });
+// }
 
 app.get('/movie/:id', (req, res) => {
     const qualityList = [];
@@ -87,7 +87,7 @@ app.get('/movie/:id', (req, res) => {
                 movieInfo.commentaries = commentaries
             })
         }
-        await wait(2000);
+        // await wait(2000);
         res.send(movieInfo);
     })
 
