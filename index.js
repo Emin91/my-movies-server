@@ -9,32 +9,36 @@ const port = process.env.PORT || 80
 const arr = [];
 const movieInfo = {}
 
-
+var resolvedFlag = true;
 async function wait(ms) {
     return new Promise((resolve, reject) => {
         setTimeout(resolve, ms)
     });
 }
 
-
+let mypromise = function functionOne(testInput){
+    console.log("Entered function");
+    return new Promise((resolve ,reject)=>{
+        setTimeout(
+            ()=>{
+                console.log("Inside the promise");
+                if(resolvedFlag==true){
+                    resolve("Resolved");
+                }else{
+                    reject("Rejected")
+                }     
+            } , 6000
+        );
+    });
+};
 
 app.get('/', async (req, res) => {
-    const resal = request('https://www.ivi.az/collections/best-movies', async (error, response, html) => {
-        if (!error && response.statusCode == 200) {
-            const $ = cheerio.load(html);
-
-            // Get best movies list
-            $('.gallery__item.gallery__item_virtual').each((i, el) => {
-                const title = $(el).find('.nbl-slimPosterBlock__title').text() || null;
-                const imgLink = $(el).find('img').attr('src') || null;
-                const movieId = $(el).find('a').attr('href').match(/\d+/g).toString() || null;
-                const ageLimit = $(el).find('.nbl-poster__nbl-ageBadge').attr('class').match(/\d+/g).toString() || null;
-                arr.push({ id: uuid(), title, imgLink, movieId, ageLimit });
-            })
-        }
-        return 'okay'
-    })
-    resal && res.json({ data: JSON.stringify(arr) });
+    mypromise().then((res)=>{
+        console.log(`The function recieved with value ${res}`)
+        res.json({ data: JSON.stringify(arr) });
+    }).catch((error)=>{
+        console.log(`Handling error as we received ${error}`);
+    });
 });
 
 
