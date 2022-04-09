@@ -8,6 +8,7 @@ const { v4: uuid } = require('uuid');
 const port = process.env.PORT
 const arr = [];
 const movieInfo = {}
+
 request('https://www.ivi.az/collections/best-movies', (error, response, html) => {
     if (!error && response.statusCode == 200) {
         const $ = cheerio.load(html);
@@ -92,9 +93,8 @@ app.get('/movie/:id', (req, res) => {
 
 });
 
-app.get('/', async(req, res) => {
-    await wait(6000)
-    arr.length && res.json({data: JSON.stringify(arr)});
+app.get('/', async (req, res) => {
+    arr.length && res.json({ data: JSON.stringify(arr) });
 });
 
 
