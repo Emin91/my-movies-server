@@ -45,7 +45,7 @@ app.get('/', async (req, res) => {
         arr.push({ id: uuid(), title, imgLink, movieId, ageLimit });
     })
     await wait(10000)
-    res.send(JSON.stringify(arr))
+    res.send("hello")
 });
 
 
